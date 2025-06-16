@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteYarat - Profesyonel Web Siteleri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            padding: 60px 40px;
+        }
+
+        .step {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.4s; }
+        .step:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .option-card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .option-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .option-desc {
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-top: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .main-content { padding: 30px 20px; }
+            .options-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 SiteYarat</h1>
+            <p>Hayalinizdeki web sitesini birlikte oluşturalım!</p>
+        </div>
+
+        <div class="main-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="step" id="step1">
+                <div class="step-title">
+                    <div class="step-number">1</div>
+                    Hangi tür site istiyorsunuz?
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" data-type="portfolio">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-title">Portfolyo</div>
+                        <div class="option-desc">Çalışmalarınızı sergilemek için profesyonel portfolyo sitesi</div>
+                    </div>
+                    <div class="option-card" data-type="business">
+                        <div class="option-icon">💼</div>
+                        <div class="option-title">İşletme</div>
+                        <div class="option-desc">Şirketiniz için kurumsal web sitesi</div>
+                    </div>
+                    <div class="option-card" data-type="blog">
+                        <div class="option-icon">📝</div>
+                        <div class="option-title">Blog</div>
+                        <div class="option-desc">İçeriklerinizi paylaşmak için blog sitesi</div>
+                    </div>
+                    <div class="option-card" data-type="ecommerce">
+                        <div class="option-icon">🛒</div>
+                        <div class="option-title">E-Ticaret</div>
+                        <div class="option-desc">Online mağaza ve satış sitesi</div>
+                    </div>
+                    <div class="option-card" data-type="landing">
+                        <div class="option-icon">🎯</div>
+                        <div class="option-title">Landing Page</div>
+                        <div class="option-desc">Ürün/hizmet tanıtımı için tek sayfa site</div>
+                    </div>
+                    <div class="option-card" data-type="restaurant">
+                        <div class="option-icon">🍽️</div>
+                        <div class="option-title">Restoran</div>
+                        <div class="option-desc">Menü ve rezervasyon sistemi ile restoran sitesi</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step2" style="display: none;">
+                <div class="step-title">
+                    <div class="step-number">2</div>
+                    Tasarım tarzınızı seçin
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" data-style="modern">
+                        <div class="option-icon">✨</div>
+                        <div class="option-title">Modern</div>
+                        <div class="option-desc">Temiz çizgiler, minimal tasarım</div>
+                    </div>
+                    <div class="option-card" data-style="colorful">
+                        <div class="option-icon">🌈</div>
+                        <div class="option-title">Renkli</div>
+                        <div class="option-desc">Canlı renkler, enerjik tasarım</div>
+                    </div>
+                    <div class="option-card" data-style="elegant">
+                        <div class="option-icon">💎</div>
+                        <div class="option-title">Zarif</div>
+                        <div class="option-desc">Şık, profesyonel görünüm</div>
+                    </div>
+                    <div class="option-card" data-style="creative">
+                        <div class="option-icon">🎭</div>
+                        <div class="option-title">Yaratıcı</div>
+                        <div class="option-desc">Özgün, sanatsal tasarım</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step3" style="display: none;">
+                <div class="step-title">
+                    <div class="step-number">3</div>
+                    Hangi özellikler olsun?
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" data-feature="contact">
+                        <div class="option-icon">📧</div>
+                        <div class="option-title">İletişim Formu</div>
+                        <div class="option-desc">Ziyaretçilerinizin size ulaşabilmesi için</div>
+                    </div>
+                    <div class="option-card" data-feature="gallery">
+                        <div class="option-icon">📸</div>
+                        <div class="option-title">Galeri</div>
+                        <div class="option-desc">Fotoğraflarınızı sergilemek için</div>
+                    </div>
+                    <div class="option-card" data-feature="social">
+                        <div class="option-icon">🔗</div>
+                        <div class="option-title">Sosyal Medya</div>
+                        <div class="option-desc">Sosyal medya hesaplarınıza bağlantılar</div>
+                    </div>
+                    <div class="option-card" data-feature="map">
+                        <div class="option-icon">🗺️</div>
+                        <div class="option-title">Harita</div>
+                        <div class="option-desc">Konumunuzu göstermek için</div>
+                    </div>
+                    <div class="option-card" data-feature="animations">
+                        <div class="option-icon">🎬</div>
+                        <div class="option-title">Animasyonlar</div>
+                        <div class="option-desc">Dinamik ve hareketli efektler</div>
+                    </div>
+                    <div class="option-card" data-feature="multilang">
+                        <div class="option-icon">🌍</div>
+                        <div class="option-title">Çoklu Dil</div>
+                        <div class="option-desc">Farklı dillerde içerik sunumu</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step4" style="display: none;">
+                <div class="step-title">
+                    <div class="step-number">4</div>
+                    İletişim bilgileriniz
+                </div>
+                <div class="form-group">
+                    <label for="siteName">Site Adı:</label>
+                    <input type="text" id="siteName" class="form-control" placeholder="Örn: Ahmet'in Portfolyosu">
+                </div>
+                <div class="form-group">
+                    <label for="contactName">Adınız:</label>
+                    <input type="text" id="contactName" class="form-control" placeholder="Adınızı girin">
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">E-posta:</label>
+                    <input type="email" id="contactEmail" class="form-control" placeholder="E-posta adresinizi girin">
+                </div>
+                <div class="form-group">
+                    <label for="additionalInfo">Ek Bilgiler (İsteğe bağlı):</label>
+                    <textarea id="additionalInfo" class="form-control" rows="4" placeholder="Sitenizde özellikle vurgulamak istediğiniz konular, renk tercihleri, örnek siteler vb."></textarea>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+                    <span>🚀 Sitemi Oluştur</span>
+                </button>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <h2>🎉 Talebiniz Alındı!</h2>
+                <p>Siteniz 24-48 saat içinde hazırlanacak ve size e-posta ile gönderilecektir.</p>
+                <p><strong>Sipariş Numaranız:</strong> <span id="orderNumber"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const selections = {
+            siteType: '',
+            designStyle: '',
+            features: [],
+            siteInfo: {}
+        };
+
+        // Adım geçişi
+        function nextStep() {
+            if (currentStep < 4) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep++;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                updateProgress();
+            }
+        }
+
+        // İlerleme çubuğunu güncelle
+        function updateProgress() {
+            const progress = (currentStep / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Seçenekleri işle
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option-card')) {
+                const card = e.target.closest('.option-card');
+                const parent = card.parentElement;
+                
+                if (currentStep === 1) {
+                    // Site türü seçimi (tek seçim)
+                    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selections.siteType = card.dataset.type;
+                    setTimeout(nextStep, 500);
+                } else if (currentStep === 2) {
+                    // Tasarım stili seçimi (tek seçim)
+                    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selections.designStyle = card.dataset.style;
+                    setTimeout(nextStep, 500);
+                } else if (currentStep === 3) {
+                    // Özellik seçimi (çoklu seçim)
+                    card.classList.toggle('selected');
+                    const feature = card.dataset.feature;
+                    if (card.classList.contains('selected')) {
+                        if (!selections.features.includes(feature)) {
+                            selections.features.push(feature);
+                        }
+                    } else {
+                        selections.features = selections.features.filter(f => f !== feature);
+                    }
+                    
+                    // En az bir özellik seçildiyse otomatik geçiş
+                    if (selections.features.length > 0) {
+                        setTimeout(() => {
+                            if (selections.features.length > 0) nextStep();
+                        }, 1000);
+                    }
+                }
+            }
+        });
+
+        // Form gönderimi
+        function handleSubmit() {
+            const siteName = document.getElementById('siteName').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const additionalInfo = document.getElementById('additionalInfo').value;
+
+            if (!siteName || !contactName || !contactEmail) {
+                alert('Lütfen zorunlu alanları doldurun!');
+                return;
+            }
+
+            selections.siteInfo = {
+                siteName,
+                contactName,
+                contactEmail,
+                additionalInfo
+            };
+
+            // Sipariş numarası oluştur
+            const orderNumber = 'SY' + Date.now().toString().slice(-6);
+            document.getElementById('orderNumber').textContent = orderNumber;
+
+            // Başarı mesajını göster
+            document.getElementById('successMessage').classList.add('show');
+            document.getElementById('submitBtn').style.display = 'none';
+
+            // Konsola verileri yazdır (gerçek uygulamada sunucuya gönderilir)
+            console.log('Site Talebi:', {
+                orderNumber,
+                ...selections,
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        // İlk yükleme
+        updateProgress();
+    </script>
+</body>
+</html>
