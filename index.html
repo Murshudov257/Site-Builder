@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiteYarat - Profesyonel Web Siteleri</title>
+    <title>SiteYarat - Peşəkar Veb Saytlar</title>
     <style>
         * {
             margin: 0;
@@ -12,557 +12,831 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
         }
 
-        .container {
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
             backdrop-filter: blur(10px);
         }
 
-        .header {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-20px, -20px) rotate(180deg); }
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .main-content {
-            padding: 60px 40px;
-        }
-
-        .step {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideIn 0.6s ease forwards;
-        }
-
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.4s; }
-        .step:nth-child(4) { animation-delay: 0.6s; }
-
-        @keyframes slideIn {
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .step-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            color: #2c3e50;
+            font-weight: 700;
         }
 
-        .step-number {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        .section-subtitle {
+            text-align: center;
             font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .options-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .option-card {
+        .feature-card {
             background: white;
-            border: 3px solid #e0e0e0;
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .option-card::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
             transform: rotate(45deg);
             transition: all 0.5s ease;
             opacity: 0;
         }
 
-        .option-card:hover::before {
+        .feature-card:hover::before {
             opacity: 1;
             animation: shimmer 1.5s ease-in-out;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .option-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
-        }
-
-        .option-card.selected {
-            border-color: #667eea;
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            transform: scale(1.02);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .option-icon {
-            font-size: 2.5rem;
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
             margin-bottom: 15px;
+            color: #2c3e50;
         }
 
-        .option-title {
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .team-card {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-name {
             font-size: 1.3rem;
             font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .team-role {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border: 3px solid #667eea;
+        }
+
+        .pricing-card.popular::before {
+            content: 'Məşhur Seçim';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #667eea;
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
             margin-bottom: 10px;
         }
 
-        .option-desc {
-            opacity: 0.8;
-            line-height: 1.5;
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .plan-currency {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .plan-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .plan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #667eea;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .form-group {
-            margin-top: 30px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .form-control {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
+            color: white;
             font-size: 1rem;
             transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .form-control:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        .submit-section {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 2px solid #f0f0f0;
+        textarea.form-control {
+            height: 120px;
+            resize: vertical;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
             color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.5s ease;
-        }
-
-        .submit-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .submit-btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #f0f0f0;
-            border-radius: 3px;
-            margin: 30px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .success-message {
-            background: linear-gradient(135deg, #00b894, #00cec9);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px 0;
             text-align: center;
-            margin-top: 30px;
-            display: none;
         }
 
-        .success-message.show {
-            display: block;
-            animation: bounceIn 0.6s ease;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
+        .social-links {
+            display: flex;
+            gap: 20px;
         }
 
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .main-content { padding: 30px 20px; }
-            .options-grid { grid-template-columns: 1fr; }
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 SiteYarat</h1>
-            <p>Hayalinizdeki web sitesini birlikte oluşturalım!</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 SiteYarat</div>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Səhifə</a></li>
+                <li><a href="#about">Haqqımızda</a></li>
+                <li><a href="#pricing">Qiymətlər</a></li>
+                <li><a href="#contact">Əlaqə</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="main-content">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Peşəkar Veb Saytlar</h1>
+            <p>Biznesinizi onlayn dünyaya təqdim etmək üçün müasir, sürətli və effektiv veb saytlar yaradırıq. 24-48 saat ərzində hazır!</p>
+            <a href="#pricing" class="cta-button">İndi Başla</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
 
-            <div class="step" id="step1">
-                <div class="step-title">
-                    <div class="step-number">1</div>
-                    Hangi tür site istiyorsunuz?
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Niyə Bizi Seçməlisiniz?</h2>
+            <p class="section-subtitle">
+                İllər ərzində yüzlərlə müştəriyə xidmət etmişik və onların biznesini rəqəmsal dünyada uğurla təmsil etmişik.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Sürətli Çatdırılma</h3>
+                    <p class="feature-desc">24-48 saat ərzində tam hazır veb saytınızı təhvil veririk</p>
                 </div>
-                <div class="options-grid">
-                    <div class="option-card" data-type="portfolio">
-                        <div class="option-icon">🎨</div>
-                        <div class="option-title">Portfolyo</div>
-                        <div class="option-desc">Çalışmalarınızı sergilemek için profesyonel portfolyo sitesi</div>
-                    </div>
-                    <div class="option-card" data-type="business">
-                        <div class="option-icon">💼</div>
-                        <div class="option-title">İşletme</div>
-                        <div class="option-desc">Şirketiniz için kurumsal web sitesi</div>
-                    </div>
-                    <div class="option-card" data-type="blog">
-                        <div class="option-icon">📝</div>
-                        <div class="option-title">Blog</div>
-                        <div class="option-desc">İçeriklerinizi paylaşmak için blog sitesi</div>
-                    </div>
-                    <div class="option-card" data-type="ecommerce">
-                        <div class="option-icon">🛒</div>
-                        <div class="option-title">E-Ticaret</div>
-                        <div class="option-desc">Online mağaza ve satış sitesi</div>
-                    </div>
-                    <div class="option-card" data-type="landing">
-                        <div class="option-icon">🎯</div>
-                        <div class="option-title">Landing Page</div>
-                        <div class="option-desc">Ürün/hizmet tanıtımı için tek sayfa site</div>
-                    </div>
-                    <div class="option-card" data-type="restaurant">
-                        <div class="option-icon">🍽️</div>
-                        <div class="option-title">Restoran</div>
-                        <div class="option-desc">Menü ve rezervasyon sistemi ile restoran sitesi</div>
-                    </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Müasir Dizayn</h3>
+                    <p class="feature-desc">Mobil uyğun, gözəl və istifadəçi dostu dizaynlar</p>
                 </div>
-            </div>
-
-            <div class="step" id="step2" style="display: none;">
-                <div class="step-title">
-                    <div class="step-number">2</div>
-                    Tasarım tarzınızı seçin
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Texniki Dəstək</h3>
+                    <p class="feature-desc">1 il ərzində pulsuza təknik dəstək və kiçik dəyişikliklər</p>
                 </div>
-                <div class="options-grid">
-                    <div class="option-card" data-style="modern">
-                        <div class="option-icon">✨</div>
-                        <div class="option-title">Modern</div>
-                        <div class="option-desc">Temiz çizgiler, minimal tasarım</div>
-                    </div>
-                    <div class="option-card" data-style="colorful">
-                        <div class="option-icon">🌈</div>
-                        <div class="option-title">Renkli</div>
-                        <div class="option-desc">Canlı renkler, enerjik tasarım</div>
-                    </div>
-                    <div class="option-card" data-style="elegant">
-                        <div class="option-icon">💎</div>
-                        <div class="option-title">Zarif</div>
-                        <div class="option-desc">Şık, profesyonel görünüm</div>
-                    </div>
-                    <div class="option-card" data-style="creative">
-                        <div class="option-icon">🎭</div>
-                        <div class="option-title">Yaratıcı</div>
-                        <div class="option-desc">Özgün, sanatsal tasarım</div>
-                    </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Münasib Qiymət</h3>
+                    <p class="feature-desc">Keyfiyyətin yanı sıra ən münasib qiymətləri təklif edirik</p>
                 </div>
-            </div>
-
-            <div class="step" id="step3" style="display: none;">
-                <div class="step-title">
-                    <div class="step-number">3</div>
-                    Hangi özellikler olsun?
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobil Uyğun</h3>
+                    <p class="feature-desc">Bütün cihazlarda mükəmməl görünən responsive dizayn</p>
                 </div>
-                <div class="options-grid">
-                    <div class="option-card" data-feature="contact">
-                        <div class="option-icon">📧</div>
-                        <div class="option-title">İletişim Formu</div>
-                        <div class="option-desc">Ziyaretçilerinizin size ulaşabilmesi için</div>
-                    </div>
-                    <div class="option-card" data-feature="gallery">
-                        <div class="option-icon">📸</div>
-                        <div class="option-title">Galeri</div>
-                        <div class="option-desc">Fotoğraflarınızı sergilemek için</div>
-                    </div>
-                    <div class="option-card" data-feature="social">
-                        <div class="option-icon">🔗</div>
-                        <div class="option-title">Sosyal Medya</div>
-                        <div class="option-desc">Sosyal medya hesaplarınıza bağlantılar</div>
-                    </div>
-                    <div class="option-card" data-feature="map">
-                        <div class="option-icon">🗺️</div>
-                        <div class="option-title">Harita</div>
-                        <div class="option-desc">Konumunuzu göstermek için</div>
-                    </div>
-                    <div class="option-card" data-feature="animations">
-                        <div class="option-icon">🎬</div>
-                        <div class="option-title">Animasyonlar</div>
-                        <div class="option-desc">Dinamik ve hareketli efektler</div>
-                    </div>
-                    <div class="option-card" data-feature="multilang">
-                        <div class="option-icon">🌍</div>
-                        <div class="option-title">Çoklu Dil</div>
-                        <div class="option-desc">Farklı dillerde içerik sunumu</div>
-                    </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">SEO Optimizasiya</h3>
+                    <p class="feature-desc">Google-da yaxşı sıralama üçün SEO optimizasiyası</p>
                 </div>
-            </div>
-
-            <div class="step" id="step4" style="display: none;">
-                <div class="step-title">
-                    <div class="step-number">4</div>
-                    İletişim bilgileriniz
-                </div>
-                <div class="form-group">
-                    <label for="siteName">Site Adı:</label>
-                    <input type="text" id="siteName" class="form-control" placeholder="Örn: Ahmet'in Portfolyosu">
-                </div>
-                <div class="form-group">
-                    <label for="contactName">Adınız:</label>
-                    <input type="text" id="contactName" class="form-control" placeholder="Adınızı girin">
-                </div>
-                <div class="form-group">
-                    <label for="contactEmail">E-posta:</label>
-                    <input type="email" id="contactEmail" class="form-control" placeholder="E-posta adresinizi girin">
-                </div>
-                <div class="form-group">
-                    <label for="additionalInfo">Ek Bilgiler (İsteğe bağlı):</label>
-                    <textarea id="additionalInfo" class="form-control" rows="4" placeholder="Sitenizde özellikle vurgulamak istediğiniz konular, renk tercihleri, örnek siteler vb."></textarea>
-                </div>
-            </div>
-
-            <div class="submit-section">
-                <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
-                    <span>🚀 Sitemi Oluştur</span>
-                </button>
-            </div>
-
-            <div class="success-message" id="successMessage">
-                <h2>🎉 Talebiniz Alındı!</h2>
-                <p>Siteniz 24-48 saat içinde hazırlanacak ve size e-posta ile gönderilecektir.</p>
-                <p><strong>Sipariş Numaranız:</strong> <span id="orderNumber"></span></p>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Komandamız</h2>
+            <p class="section-subtitle">Peşəkar komandamız sizin uğurunuz üçün çalışır</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo">👨‍💼</div>
+                    <h3 class="team-name">Əli Məmmədov</h3>
+                    <p class="team-role">Layihə Meneceri</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">👩‍💻</div>
+                    <h3 class="team-name">Ayşə Həsənova</h3>
+                    <p class="team-role">Frontend Developer</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">👨‍🎨</div>
+                    <h3 class="team-name">Rəşad Quliyev</h3>
+                    <p class="team-role">UI/UX Dizayner</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">👩‍💼</div>
+                    <h3 class="team-name">Günay Əhmədova</h3>
+                    <p class="team-role">Müştəri Məsləhətçisi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Qiymət Paketləri</h2>
+            <p class="section-subtitle">Sizin ehtiyacınıza uyğun paketi seçin</p>
+            
+            <div class="pricing-grid">
+                <!-- Başlanğıc Paketi -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Başlanğıc</h3>
+                    <div class="plan-price">1000</div>
+                    <div class="plan-currency">AZN</div>
+                    <ul class="plan-features">
+                        <li>5 səhifəyə qədər</li>
+                        <li>Mobil uyğun dizayn</li>
+                        <li>Əlaqə formu</li>
+                        <li>Google Maps inteqrasiyası</li>
+                        <li>Sosial media bağlantıları</li>
+                        <li>3 ay texniki dəstək</li>
+                        <li>SSL sertifikatı</li>
+                        <li>Sürətli hosting</li>
+                    </ul>
+                    <button class="plan-button" onclick="selectPlan('Başlanğıc')">Bu Paketi Seç</button>
+                </div>
+
+                <!-- Biznes Paketi -->
+                <div class="pricing-card popular">
+                    <h3 class="plan-name">Biznes</h3>
+                    <div class="plan-price">3000</div>
+                    <div class="plan-currency">AZN</div>
+                    <ul class="plan-features">
+                        <li>15 səhifəyə qədər</li>
+                        <li>Premium dizayn</li>
+                        <li>Çox dilli dəstək</li>
+                        <li>Blog sistemi</li>
+                        <li>Məhsul kataloqu</li>
+                        <li>WhatsApp inteqrasiyası</li>
+                        <li>6 ay texniki dəstək</li>
+                        <li>SEO optimizasiya</li>
+                        <li>Google Analytics</li>
+                        <li>Sürətli hosting</li>
+                    </ul>
+                    <button class="plan-button" onclick="selectPlan('Biznes')">Bu Paketi Seç</button>
+                </div>
+
+                <!-- Premium Paketi -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="plan-price">5000</div>
+                    <div class="plan-currency">AZN</div>
+                    <ul class="plan-features">
+                        <li>Limitsiz səhifə</li>
+                        <li>Custom dizayn</li>
+                        <li>E-ticarət sistemi</li>
+                        <li>Onlayn ödəniş</li>
+                        <li>Admin paneli</li>
+                        <li>CRM inteqrasiyası</li>
+                        <li>1 il texniki dəstək</li>
+                        <li>Premium hosting</li>
+                        <li>Təhlükəsizlik sistemi</li>
+                        <li>Performance optimizasiya</li>
+                        <li>Aylıq performans hesabatı</li>
+                    </ul>
+                    <button class="plan-button" onclick="selectPlan('Premium')">Bu Paketi Seç</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Bizimlə Əlaqə</h2>
+            <p class="section-subtitle">Layihənizi müzakirə etmək üçün bizimlə əlaqə saxlayın</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Əlaqə Məlumatları</h3>
+                    
+                    <div class="contact-item">
+                        <i>📞</i>
+                        <span>+994 55 123 45 67</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <span>info@siteyarat.az</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <span>Bakı, Azərbaycan</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i>⏰</i>
+                        <span>B.e - Cümə: 09:00 - 18:00</span>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Adınız *</label>
+                        <input type="text" id="name" class="form-control" placeholder="Adınızı daxil edin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-poçt *</label>
+                        <input type="email" id="email" class="form-control" placeholder="E-poçt ünvanınız" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+994 XX XXX XX XX">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mesajınız *</label>
+                        <textarea id="message" class="form-control" placeholder="Layihəniz haqqında məlumat verin..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="plan-button">
+                        <span id="submitText">Mesaj Göndər</span>
+                        <div id="submitLoader" class="loading" style="display: none;"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 SiteYarat. Bütün hüquqlar qorunur.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                    <a href="#" title="WhatsApp">💬</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        let currentStep = 1;
-        const selections = {
-            siteType: '',
-            designStyle: '',
-            features: [],
-            siteInfo: {}
-        };
-
-        // Adım geçişi
-        function nextStep() {
-            if (currentStep < 4) {
-                document.getElementById(`step${currentStep}`).style.display = 'none';
-                currentStep++;
-                document.getElementById(`step${currentStep}`).style.display = 'block';
-                updateProgress();
-            }
-        }
-
-        // İlerleme çubuğunu güncelle
-        function updateProgress() {
-            const progress = (currentStep / 4) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-
-        // Seçenekleri işle
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.option-card')) {
-                const card = e.target.closest('.option-card');
-                const parent = card.parentElement;
-                
-                if (currentStep === 1) {
-                    // Site türü seçimi (tek seçim)
-                    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-                    selections.siteType = card.dataset.type;
-                    setTimeout(nextStep, 500);
-                } else if (currentStep === 2) {
-                    // Tasarım stili seçimi (tek seçim)
-                    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-                    selections.designStyle = card.dataset.style;
-                    setTimeout(nextStep, 500);
-                } else if (currentStep === 3) {
-                    // Özellik seçimi (çoklu seçim)
-                    card.classList.toggle('selected');
-                    const feature = card.dataset.feature;
-                    if (card.classList.contains('selected')) {
-                        if (!selections.features.includes(feature)) {
-                            selections.features.push(feature);
-                        }
-                    } else {
-                        selections.features = selections.features.filter(f => f !== feature);
-                    }
-                    
-                    // En az bir özellik seçildiyse otomatik geçiş
-                    if (selections.features.length > 0) {
-                        setTimeout(() => {
-                            if (selections.features.length > 0) nextStep();
-                        }, 1000);
-                    }
-                }
-            }
-        });
-
-        // Form gönderimi
-        function handleSubmit() {
-            const siteName = document.getElementById('siteName').value;
-            const contactName = document.getElementById('contactName').value;
-            const contactEmail = document.getElementById('contactEmail').value;
-            const additionalInfo = document.getElementById('additionalInfo').value;
-
-            if (!siteName || !contactName || !contactEmail) {
-                alert('Lütfen zorunlu alanları doldurun!');
-                return;
-            }
-
-            selections.siteInfo = {
-                siteName,
-                contactName,
-                contactEmail,
-                additionalInfo
-            };
-
-            // Sipariş numarası oluştur
-            const orderNumber = 'SY' + Date.now().toString().slice(-6);
-            document.getElementById('orderNumber').textContent = orderNumber;
-
-            // Başarı mesajını göster
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('submitBtn').style.display = 'none';
-
-            // Konsola verileri yazdır (gerçek uygulamada sunucuya gönderilir)
-            console.log('Site Talebi:', {
-                orderNumber,
-                ...selections,
-                timestamp: new Date().toISOString()
-            });
-        }
-
-        // İlk yükleme
-        updateProgress();
-    </script>
-</body>
-</html>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target)
